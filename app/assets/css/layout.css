@@ -183,6 +183,10 @@
   border-radius: 0.5rem;
   font-weight: 600;
   padding: 0 1rem;
+
+  a {
+    color: var(--site-white);
+  }
 }
 
 .site-alert {
