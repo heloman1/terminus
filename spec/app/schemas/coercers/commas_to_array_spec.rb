@@ -2,7 +2,7 @@
 
 require "hanami_helper"
 
-RSpec.describe Terminus::Schemas::Coercers::Array do
+RSpec.describe Terminus::Schemas::Coercers::CommasToArray do
   subject(:coercer) { described_class }
 
   let(:attributes) { {days: "monday\ntuesday\nwednesday"} }

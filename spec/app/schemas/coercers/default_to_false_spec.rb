@@ -2,7 +2,7 @@
 
 require "hanami_helper"
 
-RSpec.describe Terminus::Schemas::Coercers::Boolean do
+RSpec.describe Terminus::Schemas::Coercers::DefaultToFalse do
   subject(:coercer) { described_class }
 
   let(:attributes) { {display: true} }
@@ -19,6 +19,14 @@ RSpec.describe Terminus::Schemas::Coercers::Boolean do
     it "answers false when key is missing" do
       attributes.delete :display
       expect(coercer.call(:display, result)).to eq(display: false)
+    end
+
+    context "when attributes are nil" do
+      let(:result) { Dry::Schema::Result.new nil, message_compiler: nil, result_ast: [] }
+
+      it "answers nil" do
+        expect(coercer.call(:display, result)).to be(nil)
+      end
     end
   end
 end

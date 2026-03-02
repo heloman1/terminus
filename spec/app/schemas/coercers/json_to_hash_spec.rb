@@ -2,7 +2,7 @@
 
 require "hanami_helper"
 
-RSpec.describe Terminus::Schemas::Coercers::Hash do
+RSpec.describe Terminus::Schemas::Coercers::JSONToHash do
   subject(:coercer) { described_class }
 
   let :attributes do

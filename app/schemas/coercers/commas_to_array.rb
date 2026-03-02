@@ -5,11 +5,11 @@ require "refinements/hash"
 
 module Terminus
   module Schemas
-    # Coerces a comma delimited string into an array.
+    # Coerces a key's comma delimited string value into an array.
     module Coercers
       using Refinements::Hash
 
-      Array = lambda do |key, result|
+      CommasToArray = lambda do |key, result|
         Hash(result.to_h).transform_value!(key) { String(it).split(/\r\n|\n|\r|\s/) }
       end
     end

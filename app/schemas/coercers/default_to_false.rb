@@ -1,19 +1,20 @@
 # auto_register: false
 # frozen_string_literal: true
 
-require "json"
 require "refinements/hash"
 
 module Terminus
   module Schemas
-    # Coerces JSON into a hash.
+    # Coerces a key's value to false when key is missing.
     module Coercers
       using Refinements::Hash
 
-      Hash = lambda do |key, result|
+      DefaultToFalse = lambda do |key, result|
+        return unless result.output
+
         attributes = Hash result.to_h
-        attributes.transform_value!(key) { JSON it if it }
-      rescue JSON::ParserError
+        attributes[key] = false unless result.key? key
+
         attributes
       end
     end

@@ -19,8 +19,8 @@ module Terminus
         optional(:sleep_start_at).maybe :string
         optional(:sleep_stop_at).maybe :string
 
-        after(:value_coercer, &Coercers::Boolean.curry[:proxy])
-        after(:value_coercer, &Coercers::Boolean.curry[:firmware_update])
+        after(:value_coercer, &Coercers::DefaultToFalse.curry[:proxy])
+        after(:value_coercer, &Coercers::DefaultToFalse.curry[:firmware_update])
       end
     end
   end
