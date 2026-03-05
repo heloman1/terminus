@@ -5,7 +5,11 @@ module Terminus
     # The screen relation.
     class Screen < DB::Relation
       schema :screen, infer: true do
-        associations { belongs_to :model, relation: :model }
+        associations do
+          belongs_to :model, relation: :model
+          has_many :playlist_items, relation: :playlist_item, as: :playlist_items, view: :ordered
+          has_many :playlists, through: :playlist_item, relation: :playlist, as: :playlists
+        end
       end
 
       def ordered = select_append(playlist_item[:position]).order :position
