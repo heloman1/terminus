@@ -1164,6 +1164,8 @@ You'll get an empty hash when there is nothing to delete.
 
 Used for generating new device screens by supplying content for rendering, screenshotting, and grey scaling to render properly on your device. Both `.png` or `.bmp` extensions are supported for the `file_name` key. If you don't supply a `file_name`, the server will generate one for you using a UUID for the file name.
 
+💡 You can use the same JSON body for HTTP PATCH requests as you can for POST requests. Additionally, an optional `playlist_id` can be supplied when making POST requests in order to associate a screen with a playlist.
+
 .GET Request
 [%collapsible]
 ====
@@ -1212,11 +1214,11 @@ curl -X "POST" "https://localhost:2443/api/screens" \
      -H 'Content-Type: application/json' \
      -d $'{
   "screen": {
+    "model_id": "1",
     "label": "Demo",
-    "content": "<h1>Demo</h1>",
     "name": "demo",
-    "file_name": "demo.png",
-    "model_id": "1"
+    "content": "<h1>Demo</h1>",
+    "file_name": "demo.png"
   }
 }'
 ----
@@ -1232,12 +1234,12 @@ curl -X "POST" "https://localhost:2443/api/screens" \
      -H 'Content-Type: application/json' \
      -d $'{
   "screen": {
-    "file_name": "demo.png",
+    "model_id": "1",
     "label": "Demo",
-    "preprocessed": true,
     "name": "demo",
     "uri": "https://leonardo.ai/wp-content/uploads/2023/07/image-131.jpeg",
-    "model_id": "1"
+    "preprocessed": true,
+    "file_name": "demo.png"
   }
 }'
 ----
@@ -1253,11 +1255,11 @@ curl -X "POST" "https://localhost:2443/api/screens" \
      -H 'Content-Type: application/json' \
      -d $'{
   "screen": {
-    "file_name": "demo.png",
+    "model_id": "1",
     "label": "Demo",
     "name": "demo",
     "uri": "https://leonardo.ai/wp-content/uploads/2023/07/image-131.jpeg",
-    "model_id": "1"
+    "file_name": "demo.png"
   }
 }'
 ----
@@ -1274,11 +1276,11 @@ curl -X "POST" "https://localhost:2443/api/screens" \
      -H 'Content-Type: application/json' \
      -d $'{
   "screen": {
-    "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAAXNSR0IArs4c6QAAAAtJREFUCFtjYGAAAAADAAHc7H1IAAAAAElFTkSuQmCC",
+    "model_id": "1",
     "label": "Demo",
     "name": "demo",
-    "file_name": "demo.png",
-    "model_id": "1"
+    "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAAXNSR0IArs4c6QAAAAtJREFUCFtjYGAAAAADAAHc7H1IAAAAAElFTkSuQmCC",
+    "file_name": "demo.png"
   }
 }'
 ----
