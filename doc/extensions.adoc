@@ -12,7 +12,7 @@
 
 = Extensions
 
-Extensions are similar to Plugins as found in our {core_link} application. With extensions, the goal is to encompass all plugin capabilities under a single umbrella. This also fits better with the architecture of this application and allows this application to evolve and expand upon what is possible.
+Extensions are similar to Plugins as found in our {core_link} application. With extensions, the goal is to encompass all plugin capabilities under a single umbrella. This also fits better with the architecture of this application and allows this application to expand upon what is possible.
 
 toc::[]
 
@@ -41,39 +41,41 @@ The following provides a visual roadmap of current development and work that is 
 
 == Walkthrough
 
-To help you get used to how Terminus extensions work versus Core plugins, let's walk through a scenario building a Core plugin and Terminus extension side-by-side so you can see the differences. To get started, create a new link:https://trmnl.com/plugin_settings/new?keyname=private_plugin[private plugin] in Core and then do the same in Terminus but create a new Extension instead. Here's the steps:
+To help you get started, let's walk through a scenario building an extension:
 
-. In both Core and Terminus first start by naming your plugin/extension. In Terminus you can also give yourself a nice label too.
-. In Core, select the _Polling_ strategy. In Terminus, select the _Poll_ kind.
-. In Core, add `https://ghibliapi.vercel.app/films` as your Polling URL. In Terminus, do the same but use the _URIs_ text area.
-. In Core, click _Save_, then click _Edit Markup_, select _TRMNL_ as your model, and then copy and paste the Liquid Template below in your editor. You can also click _Save_ at this point.
-. In Terminus, scroll down to the Template editor, copy and paste the same Liquid Template but place it inside the `+<div class="view view--full">+` element, select _TRMNL OG (2-bit)_ as your model, and then click _Save_.
+. Visit the _Extensions_ page and click the plus icon to create a new extension.
+. Fill in _Label_ and _Name_ information.
+. Select _TRMNL OG (2-bit)_ as your model (via the Build Matrix).
+. For _Kind_, select _Poll_.
+. For _URLs_, enter: `https://ghibliapi.vercel.app/films`.
+. Scroll down to the Template editor, copy and paste the same Liquid Template (see below) but place it inside the `+<div class="layout layout--col">+` element.
+. Click _Save_ to save your changes.
 
 .Liquid Template
 [%collapsible]
 ====
 [source,html]
 ----
-{% for item in data limit:5 %}
+{% for film in source limit:5 %}
   <div class="item">
     <div class="meta">
       <span class="index">{{ forloop.index }}</span>
     </div>
 
-    <img src="{{item.image}}" width="50" height="50">
+    <img src="{{film.image}}" width="50" height="50">
 
     <div class="content">
-      <span class="title title--small">{{ item.title }}</span>
-      <span class="description">{{ item.description | truncate: 100}}</span>
+      <span class="title title--small">{{ film.title }}</span>
+      <span class="description">{{ film.description | truncate: 100}}</span>
     </div>
   </div>
 {% endfor %}
 ----
 ====
 
-In both cases, you'll see the same screen being rendered which is a list of Studio Ghibli films. Congratulations! In Core, you can add this plugin to your device playlist. In Terminus, you add the generated screen to your playlist instead.
+Upon page reload, click the _Preview_ button to see how your screen will render.
 
-Additionally, in Terminus, ensure you set a schedule for updating your screen. You can set the schedule as fast as a minute or as slow as a month.
+At this point, you can set a schedule for updating your screen as fast as a minute or as slow as a month.
 
 == Liquid Templates
 
