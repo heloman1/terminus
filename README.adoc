@@ -4,6 +4,7 @@
 
 :chrome_link: link:https://www.google.com/chrome[Google Chrome]
 :core_api_link: link:https://trmnl.com/api-docs/index.html[Core API]
+:devices_link: link:doc/devices.adoc[Devices]
 :docker_doc_link: link:doc/docker.adoc[Docker]
 :docker_link: link:https://www.docker.com[Docker]
 :dragonfly_link: link:https://www.dragonflydb.io[Dragonfly]
@@ -208,10 +209,7 @@ Also, once logged in, you can manage your settings as follows:
 
 === Devices
 
-Connecting devices requires using the WiFi captive portal on your mobile phone to connect your TRMNL device to your local network where this server is running. You can also delete your device, via the UI and/or API, and it'll be reconfigured for you automatically when the device next makes a link:doc/api.adoc#display[Display API] request. For more information (including dealing with tricky WiFi situations), check out the help guides:
-
-* link:https://help.usetrmnl.com/en/articles/12263392-connect-your-device-to-terminus-byos[How to connect your device to Terminus].
-* link:https://help.usetrmnl.com/en/articles/11663377-setting-up-a-trmnl-on-tricky-wi-fi-situations[Dealing with tricky Wi-Fi situations].
+See {devices_link} documentation for details.
 
 === Firmware
 
