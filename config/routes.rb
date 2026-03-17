@@ -162,7 +162,7 @@ module Terminus
 
     slice(:health, at: "/up") { root to: "show" }
 
-    use Rack::Static, root: "public", urls: ["/.well-known/security.txt", "/uploads"]
+    use Rack::Static, root: "public", urls: ["/.well-known/security.txt", "/fonts", "/uploads"]
     use Aspects::Screens::Designer::Middleware, pattern: %r(/preview/(?<name>.+))
   end
   # rubocop:enable Metrics/ClassLength
