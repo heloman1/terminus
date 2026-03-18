@@ -9,6 +9,8 @@ RSpec.shared_context "with screen mold" do
       mime_type: "image/png",
       bit_depth: 1,
       colors: 2,
+      color_codes: [],
+      grays: 2,
       rotation: 0,
       offset_x: 0,
       offset_y: 0,

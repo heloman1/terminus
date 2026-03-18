@@ -3,41 +3,41 @@
 module Terminus
   module Aspects
     module Screens
-      MOLD_MODEL_KEYS = %i[
-        mime_type
-        bit_depth
-        colors
-        rotation
-        offset_x
-        offset_y
-        width
-        height
-      ].freeze
-
-      # Defines the mold in which to convert (cast) a screen.
+      # Defines the blueprint in which to create a screen.
       Mold = Struct.new(
         :model_id,
         :name,
         :label,
         :content,
-        :kind,
-        *MOLD_MODEL_KEYS,
+        :mode,
+        :mime_type,
+        :bit_depth,
+        :colors,
+        :color_codes,
+        :grays,
+        :rotation,
+        :offset_x,
+        :offset_y,
+        :width,
+        :height,
         :input_path,
         :output_path
       ) do
-        def self.for(model, keys: MOLD_MODEL_KEYS, **)
-          new(model_id: model.id, **model.to_h.slice(*keys), **)
-        end
+        def color? = dither? && Array(color_codes).any?
 
         def crop = "#{dimensions}+#{offset_x}+#{offset_y}"
 
-        def cropable? = !offset_x.zero? || !offset_y.zero?
+        def cropable? = offset_x.positive? || offset_y.positive?
 
-        def dither = kind == :text ? "None" : "FloydSteinberg"
+        def dither? = mode == :dither
 
         def dimensions = "#{width}x#{height}"
 
-        def filename = %(#{name}.#{mime_type.split("/").last})
+        def file_name = %(#{name}.#{mime_type.split("/").last})
+
+        def file_type = mime_type.split("/").last.then { it.match?(/bmp/i) ? "bmp3" : it }
+
+        def image? = mime_type.start_with? "image"
 
         def image_attributes = {model_id:, name:, label:}
 

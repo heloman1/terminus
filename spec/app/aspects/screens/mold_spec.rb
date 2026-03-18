@@ -11,7 +11,6 @@ RSpec.describe Terminus::Aspects::Screens::Mold do
       name: "test",
       label: "Test",
       content: "test",
-      kind: :text,
       mime_type: "image/png",
       bit_depth: 4,
       rotation: 0,
@@ -24,39 +23,17 @@ RSpec.describe Terminus::Aspects::Screens::Mold do
 
   let(:model) { Factory.structs[:model, bit_depth: 1, colors: 2] }
 
-  describe ".for" do
-    it "answers instance with model attributes" do
-      expect(described_class.for(model)).to eq(
-        described_class[
-          model_id: model.id,
-          mime_type: "image/png",
-          bit_depth: 1,
-          colors: 2,
-          rotation: 0,
-          offset_x: 0,
-          offset_y: 0,
-          width: 800,
-          height: 480
-        ]
-      )
+  describe "#color?" do
+    it "answers true with dither mode, positive bit depth, and color codes" do
+      expect(mold.with(mode: :dither, bit_depth: 1, color_codes: ["#000000"]).color?).to be(true)
     end
 
-    it "answers instance with model and additional attributes" do
-      expect(described_class.for(model, name: "test", kind: :text)).to eq(
-        described_class[
-          model_id: model.id,
-          name: "test",
-          kind: :text,
-          mime_type: "image/png",
-          bit_depth: 1,
-          colors: 2,
-          rotation: 0,
-          offset_x: 0,
-          offset_y: 0,
-          width: 800,
-          height: 480
-        ]
-      )
+    it "answers false with color codes are missing" do
+      expect(mold.with(mode: :dither, bit_depth: 1, color_codes: nil).color?).to be(false)
+    end
+
+    it "answers false when missing required attributes" do
+      expect(mold.color?).to be(false)
     end
   end
 
@@ -80,13 +57,13 @@ RSpec.describe Terminus::Aspects::Screens::Mold do
     end
   end
 
-  describe "#dither" do
-    it "answers none kind is text" do
-      expect(mold.dither).to eq("None")
+  describe "#dither?" do
+    it "answers true when mode is dither" do
+      expect(mold.with(mode: :dither).dither?).to be(true)
     end
 
-    it "answers Floyd FloydSteinberg kind isn't text" do
-      expect(mold.with(kind: :art).dither).to eq("FloydSteinberg")
+    it "answers false when mode isn't dither" do
+      expect(mold.dither?).to be(false)
     end
   end
 
@@ -96,9 +73,29 @@ RSpec.describe Terminus::Aspects::Screens::Mold do
     end
   end
 
-  describe "#filename" do
-    it "answers filename" do
-      expect(mold.filename).to eq("test.png")
+  describe "#file_name" do
+    it "answers file name" do
+      expect(mold.file_name).to eq("test.png")
+    end
+  end
+
+  describe "#file_type" do
+    it "answers BMP3 when MIME Type is BMP" do
+      expect(mold.with(mime_type: "bmp").file_type).to eq("bmp3")
+    end
+
+    it "answers PNG when MIME Type is PNG" do
+      expect(mold.file_type).to eq("png")
+    end
+  end
+
+  describe "#image?" do
+    it "answers true with image MIME type" do
+      expect(mold.image?).to be(true)
+    end
+
+    it "answers false without image MIME type" do
+      expect(mold.with(mime_type: "text/html").image?).to be(false)
     end
   end
 

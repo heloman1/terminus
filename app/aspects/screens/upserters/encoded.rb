@@ -30,7 +30,7 @@ module Terminus
 
           def process mold, directory
             mold.with! input_path: Pathname(directory).join("input.png"),
-                       output_path: directory.join(mold.filename)
+                       output_path: directory.join(mold.file_name)
 
             mold.input_path
                 .binwrite(decoder.strict_decode64(mold.content))

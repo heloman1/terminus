@@ -18,7 +18,7 @@ module Terminus
           private
 
           def process mold, directory
-            mold.output_path = directory.join mold.filename
+            mold.output_path = directory.join mold.file_name
 
             capture_input(mold, directory).bind { converter.call mold }
                                           .bind { |path| block_given? ? yield(path) : path }
