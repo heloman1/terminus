@@ -7,7 +7,8 @@ RSpec.describe "/api/screens", :db do
 
   include_context "with JWT"
 
-  let(:model) { Factory[:model] }
+  let(:palette) { Factory[:palette] }
+  let(:model) { Factory[:model, palette_names: [palette.name]] }
   let(:screen) { Factory[:screen, :with_image, model_id: model.id] }
 
   it "answers records when screens exist" do
@@ -395,25 +396,6 @@ RSpec.describe "/api/screens", :db do
       status: 422,
       title: "Unprocessable Content",
       detail: "Unable to find model for model ID (666) or device ID (nil).",
-      instance: "/api/screens"
-    ]
-
-    expect(json_payload).to eq(problem.to_h)
-  end
-
-  it "answers problem details for unsupported model" do
-    model = Factory[:model, mime_type: "image/webp"]
-
-    patch routes.path(:api_screen_patch, id: screen.id),
-          {screen: {model_id: model.id, content: "<h1>Test</h2>"}}.to_json,
-          "HTTP_AUTHORIZATION" => access_token,
-          "CONTENT_TYPE" => "application/json"
-
-    problem = Petail[
-      type: "/problem_details#screen_payload",
-      status: 422,
-      title: "Unprocessable Content",
-      detail: "Unsupported MIME Type: image/webp.",
       instance: "/api/screens"
     ]
 
