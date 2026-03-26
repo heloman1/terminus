@@ -8,6 +8,8 @@ module Terminus
         config.messages.namespace = :model
 
         params { required(:model).filled Schemas::Models::Upsert }
+
+        rule model: :mime_type, &Rules::ImageMimeType
       end
     end
   end

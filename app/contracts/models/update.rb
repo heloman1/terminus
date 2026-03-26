@@ -11,6 +11,8 @@ module Terminus
           required(:id).filled :integer
           required(:model).filled Schemas::Models::Upsert
         end
+
+        rule model: :mime_type, &Rules::ImageMimeType
       end
     end
   end
