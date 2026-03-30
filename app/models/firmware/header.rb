@@ -7,12 +7,13 @@ module Terminus
     module Firmware
       KEY_MAP = {
         HTTP_ACCESS_TOKEN: :api_key,
-        HTTP_BATTERY_VOLTAGE: :battery,
+        HTTP_BATTERY_VOLTAGE: :battery_voltage,
         HTTP_FW_VERSION: :firmware_version,
         HTTP_HEIGHT: :height,
         HTTP_HOST: :host,
         HTTP_ID: :mac_address,
         HTTP_MODEL: :model_name,
+        HTTP_PERCENT_CHARGED: :battery_charge,
         HTTP_REFRESH_RATE: :refresh_rate,
         HTTP_RSSI: :wifi,
         HTTP_SENSORS: :sensors,
@@ -32,7 +33,14 @@ module Terminus
         end
 
         def device_attributes
-          {battery:, firmware_version: firmware_version.to_s, wifi:, width:, height:}.compress
+          {
+            battery_charge:,
+            battery_voltage:,
+            firmware_version: firmware_version.to_s,
+            wifi:,
+            width:,
+            height:
+          }.compress
         end
       end
     end

@@ -19,6 +19,7 @@ RSpec.describe Terminus::Aspects::Firmware::Headers::Parser do
         HTTP_HOST.+
         HTTP_ID.+
         HTTP_MODEL.+
+        HTTP_PERCENT_CHARGE.+
         HTTP_REFRESH_RATE.+
         HTTP_RSSI.+
         HTTP_SENSORS.+
@@ -41,7 +42,8 @@ RSpec.describe Terminus::Aspects::Firmware::Headers::Parser do
           model_name: "og_plus",
           api_key: "abc123",
           refresh_rate: 25,
-          battery: 4.74,
+          battery_charge: 85.0,
+          battery_voltage: 4.74,
           firmware_version: "1.2.3",
           wifi: -54,
           width: 800,

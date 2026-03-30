@@ -16,7 +16,8 @@ RSpec.describe Terminus::Aspects::Devices::Synchronizer, :db do
       expect(updater.call(firmware_headers)).to match(
         Success(
           have_attributes(
-            battery: 4.74,
+            battery_charge: 85,
+            battery_voltage: 4.74,
             firmware_version: "1.2.3",
             wifi: -54,
             width: 800,

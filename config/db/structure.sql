@@ -257,7 +257,7 @@ CREATE TABLE public.device (
     api_key text,
     firmware_version text,
     wifi integer DEFAULT 0 CONSTRAINT devices_wifi_not_null NOT NULL,
-    battery double precision DEFAULT 0 CONSTRAINT devices_battery_not_null NOT NULL,
+    battery_voltage double precision DEFAULT 0 CONSTRAINT devices_battery_not_null NOT NULL,
     refresh_rate integer DEFAULT 900 CONSTRAINT devices_refresh_rate_not_null NOT NULL,
     image_timeout integer DEFAULT 0 CONSTRAINT devices_image_timeout_not_null NOT NULL,
     width integer DEFAULT 0 CONSTRAINT devices_width_not_null NOT NULL,
@@ -269,7 +269,8 @@ CREATE TABLE public.device (
     sleep_start_at time without time zone,
     sleep_stop_at time without time zone,
     model_id integer NOT NULL,
-    playlist_id integer
+    playlist_id integer,
+    battery_charge double precision DEFAULT 0 NOT NULL
 );
 
 
@@ -1538,4 +1539,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20260219103153_create_extension_device.rb'),
 ('20260318132059_rename_model_palette_ids_column.rb'),
 ('20260318132419_add_palette.rb'),
-('20260330115025_add_extension_mode_column.rb');
+('20260330115025_add_extension_mode_column.rb'),
+('20260330145138_alter_device_battery_columns.rb');

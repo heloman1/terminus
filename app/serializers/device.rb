@@ -15,7 +15,8 @@ module Terminus
         api_key
         firmware_version
         wifi
-        battery
+        battery_charge
+        battery_voltage
         refresh_rate
         image_timeout
         width

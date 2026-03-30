@@ -14,6 +14,8 @@ RSpec.describe Terminus::Schemas::Devices::Upsert do
         friendly_id: "ABC123",
         mac_address: "AA:BB:CC:11:22:33",
         api_key: "secret",
+        battery_charge: 85.0,
+        battery_voltage: 3.5,
         refresh_rate: 100,
         image_timeout: 0,
         proxy: "on",
@@ -23,6 +25,14 @@ RSpec.describe Terminus::Schemas::Devices::Upsert do
 
     it "answers success when all attributes are valid" do
       expect(contract.call(attributes).to_monad).to be_success
+    end
+
+    it "answers failure when battery charge is less than zero" do
+      attributes[:battery_charge] = -1
+
+      expect(contract.call(attributes).errors.to_h).to include(
+        battery_charge: ["must be greater than or equal to 0"]
+      )
     end
 
     it "answers failure when refresh rate is less than zero" do

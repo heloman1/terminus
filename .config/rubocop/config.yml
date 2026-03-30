@@ -15,11 +15,11 @@ Metrics/BlockLength:
     - slices/authentication/middleware.rb
 Metrics/CyclomaticComplexity:
   AllowedMethods:
-    - battery_percentage
+    - battery_voltage_to_percent
     - wifi_percentage
 Metrics/MethodLength:
   AllowedMethods:
-    - battery_percentage
+    - battery_voltage_to_percent
     - cloneable_attributes
     - wifi_percentage
   Exclude:

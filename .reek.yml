@@ -80,7 +80,7 @@ detectors:
       - Terminus::Aspects::Screens::Placeholder#initialize
       - Terminus::Aspects::Screens::Shoter#save
       - Terminus::Providers::Sidekiq#load_schedule
-      - Terminus::Views::Parts::Device#battery_percentage
+      - Terminus::Views::Parts::Device#battery_voltage_to_percent
       - Terminus::Views::Parts::Device#wifi_percentage
   UtilityFunction:
     exclude:

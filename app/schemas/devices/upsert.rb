@@ -12,6 +12,8 @@ module Terminus
         optional(:friendly_id).filled :string
         required(:mac_address).filled Types::MACAddress
         optional(:api_key).filled :string
+        optional(:battery_charge).filled { int? > gteq?(0) }
+        optional(:battery_voltage).filled :float
         optional(:refresh_rate).filled { int? > gteq?(10) }
         optional(:image_timeout).filled { int? > gteq?(0) }
         optional(:proxy).filled :bool

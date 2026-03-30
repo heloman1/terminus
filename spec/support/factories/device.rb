@@ -7,7 +7,8 @@ Factory.define :device, relation: :device do |factory|
   factory.label "Test"
   factory.api_key "abc123"
   factory.mac_address "A1:B2:C3:D4:E5:F6"
-  factory.battery 3.0
+  factory.battery_charge 0
+  factory.battery_voltage 3.0
   factory.wifi(-44)
   factory.firmware_version "1.2.3"
   factory.firmware_update true

@@ -10,6 +10,7 @@ RSpec.shared_context "with firmware headers" do
       "HTTP_HOST" => "https://localhost",
       "HTTP_ID" => "A1:B2:C3:D4:E5:F6",
       "HTTP_MODEL" => "og",
+      "HTTP_PERCENT_CHARGED" => "85",
       "HTTP_REFRESH_RATE" => "25",
       "HTTP_RSSI" => "-54",
       "HTTP_SENSORS" => "make=Sensirion;model=SCD41;kind=humidity;" \

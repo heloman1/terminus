@@ -12,6 +12,7 @@ module Terminus
         optional(:HTTP_HOST).filled :string
         required(:HTTP_ID).filled :string
         optional(:HTTP_MODEL).filled :string
+        optional(:HTTP_PERCENT_CHARGED).filled :float
         optional(:HTTP_REFRESH_RATE).filled :integer
         optional(:HTTP_RSSI).filled :integer
         optional(:HTTP_SENSORS).maybe :string
