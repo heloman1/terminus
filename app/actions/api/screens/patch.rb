@@ -19,6 +19,7 @@ module Terminus
               optional(:model_id).filled :integer
               optional(:label).filled :string
               optional(:name).filled :string
+              optional(:mode).filled :string
               optional(:content).filled :string
               optional(:uri).filled :string
               optional(:preprocessed).filled :bool

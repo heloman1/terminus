@@ -49,7 +49,7 @@ RSpec.describe "/api/screens", :db do
     expect(json_payload).to eq(data: [])
   end
 
-  it "creates with playlist ID" do
+  it "creates with playlist ID and mode" do
     playlist = Factory[:playlist]
 
     post routes.path(:api_screen_create),
@@ -59,7 +59,8 @@ RSpec.describe "/api/screens", :db do
              model_id: model.id,
              label: "Test",
              name: "test",
-             content: "<p>n/a</p>"
+             mode: "dither",
+             content: "<p>A test.</p>"
            }
          }.to_json,
          "HTTP_AUTHORIZATION" => access_token,
@@ -287,9 +288,9 @@ RSpec.describe "/api/screens", :db do
     )
   end
 
-  it "patches screen model ID" do
+  it "patches screen content with model ID and mode" do
     patch routes.path(:api_screen_patch, id: screen.id),
-          {screen: {model_id: model.id, content: "<p>Test</p>"}}.to_json,
+          {screen: {model_id: model.id, mode: "dither", content: "<p>Test</p>"}}.to_json,
           "HTTP_AUTHORIZATION" => access_token,
           "CONTENT_TYPE" => "application/json"
 

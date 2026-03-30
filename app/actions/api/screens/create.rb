@@ -22,6 +22,7 @@ module Terminus
               required(:model_id).filled :integer
               required(:label).filled :string
               required(:name).filled :string
+              optional(:mode).filled :string
               optional(:content).filled :string
               optional(:uri).filled :string
               optional(:preprocessed).filled :bool

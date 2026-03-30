@@ -1135,8 +1135,10 @@ You'll get an empty hash when there is nothing to delete.
 
 Used for managing device screens by supplying content for rendering, screenshotting, and grey scaling to render properly on your device. You can also use these optional keys when making requests:
 
-* `playlist_id`: When supplied, ensures your screen is added to an existing playlist.
-* `file_name`: When supplied, ensures your desired file name is used. Otherwise, if you don't supply a `file_name`, the server will generate one for you using a UUID for the file name.
+* `playlist_id`: Ensures your screen is added to an existing playlist.
+* `mode`: Determines the mode in which the screen will be processed. Default: `nil`. The following values are supported:
+** `dither`: Ensures your image will be dithered. Useful when processing photos or images with very little text.
+* `file_name`: Ensures your desired file name is used. Otherwise, when not supplied, the server will generate a UUID for the file name.
 
 .GET Request
 [%collapsible]
