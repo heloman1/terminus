@@ -384,7 +384,8 @@ CREATE TABLE public.extension (
     last_day_of_month boolean DEFAULT false NOT NULL,
     start_at timestamp without time zone DEFAULT date_trunc('day'::text, CURRENT_TIMESTAMP) NOT NULL,
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    mode text DEFAULT 'text'::text NOT NULL
 );
 
 
@@ -1536,4 +1537,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20260217081447_create_device_sensor.rb'),
 ('20260219103153_create_extension_device.rb'),
 ('20260318132059_rename_model_palette_ids_column.rb'),
-('20260318132419_add_palette.rb');
+('20260318132419_add_palette.rb'),
+('20260330115025_add_extension_mode_column.rb');
