@@ -21,7 +21,7 @@ module Terminus
         required(:template).maybe :string
         required(:fields).maybe :array
         required(:data).maybe :hash
-        required(:interval).maybe { int? > gteq?(0) }
+        required(:interval).maybe :integer
         optional(:unit).filled :string
         optional(:days).maybe :array
         required(:last_day_of_month).filled :bool

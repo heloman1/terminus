@@ -39,7 +39,7 @@ RSpec.describe Terminus::Schemas::Devices::Upsert do
       attributes[:refresh_rate] = -1
 
       expect(contract.call(attributes).errors.to_h).to include(
-        refresh_rate: ["must be greater than or equal to 10"]
+        refresh_rate: ["must be greater than 0"]
       )
     end
 

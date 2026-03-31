@@ -63,14 +63,6 @@ RSpec.describe Terminus::Schemas::Extensions::Upsert do
       expect(contract.call(attributes).to_h).to include(data: {"label" => "Test"})
     end
 
-    it "answers failure when repeat interval is less than zero" do
-      attributes[:interval] = -1
-
-      expect(contract.call(attributes).errors.to_h).to include(
-        interval: ["must be greater than or equal to 0"]
-      )
-    end
-
     it "answers true when last day of month is truthy" do
       expect(contract.call(attributes).to_h).to include(last_day_of_month: true)
     end
