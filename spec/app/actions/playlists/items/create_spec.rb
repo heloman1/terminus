@@ -20,7 +20,6 @@ RSpec.describe Terminus::Actions::Playlists::Items::Create, :db do
     end
 
     it "updates playlist with created item when there is no current item" do
-      playlist_repository
       Rack::MockRequest.new(action).post("", params:)
 
       expect(playlist_repository.find(playlist.id)).to have_attributes(
@@ -28,9 +27,15 @@ RSpec.describe Terminus::Actions::Playlists::Items::Create, :db do
       )
     end
 
-    it "fails as unprocessable entity when parameters are invalid" do
-      playlist_repository
+    it "answers unprocessable entity with invalid parameters" do
       params.delete :playlist_item
+      response = Rack::MockRequest.new(action).post("", params:)
+
+      expect(response.status).to eq(422)
+    end
+
+    it "answers unprocessable entity with invalid playlist ID" do
+      params[:playlist_id] = 666
       response = Rack::MockRequest.new(action).post("", params:)
 
       expect(response.status).to eq(422)

@@ -34,7 +34,6 @@ module Terminus
             id = item.id
             repository.update id, **parameters[:playlist_item]
 
-            # FIX: Ensure updated record includes associations so you don't have to find record.
             response.render show_view, item: repository.find(id), layout: false
           end
 
