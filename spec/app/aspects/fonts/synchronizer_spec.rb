@@ -47,19 +47,19 @@ RSpec.describe Terminus::Aspects::Fonts::Synchronizer do
 
       allow(downloader).to receive(:call) do
         count += 1
-        count.even? ? response : Failure("Danger!")
+        count.odd? ? response : Failure("Danger!")
       end
 
       expect(synchronizer.call).to eq(
         [
+          Success(temp_dir.join("BlockKie.ttf")),
           Failure("Danger!"),
-          Success(temp_dir.join("Inter-Italic.ttf")),
+          Success(temp_dir.join("dogicapixelbold.ttf")),
           Failure("Danger!"),
-          Success(temp_dir.join("NicoBold-Regular.ttf")),
+          Success(temp_dir.join("Inter.ttf")),
           Failure("Danger!"),
-          Success(temp_dir.join("NicoPups-Regular.ttf")),
-          Failure("Danger!"),
-          Success(temp_dir.join("dogicapixelbold.ttf"))
+          Success(temp_dir.join("NicoClean-Regular.ttf")),
+          Failure("Danger!")
         ]
       )
     end

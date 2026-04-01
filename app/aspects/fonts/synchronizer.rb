@@ -13,13 +13,13 @@ module Terminus
           root_uri: "https://trmnl.com/fonts",
           names: %w[
             BlockKie.ttf
+            dogicapixel.ttf
+            dogicapixelbold.ttf
             Inter-Italic.ttf
             Inter.ttf
             NicoBold-Regular.ttf
             NicoClean-Regular.ttf
             NicoPups-Regular.ttf
-            dogicapixel.ttf
-            dogicapixelbold.ttf
           ]
         ]
         include Dry::Monads[:result]
