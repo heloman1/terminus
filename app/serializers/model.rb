@@ -17,6 +17,9 @@ module Terminus
         rotation
         offset_x
         offset_y
+        scale_factor
+        palette_names
+        css
         width
         height
         created_at

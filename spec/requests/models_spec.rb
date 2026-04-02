@@ -12,13 +12,15 @@ RSpec.describe "/api/models", :db do
       name: "test",
       label: "Test",
       description: "A test.",
-      kind: "terminus",
-      mime_type: "image/bmp",
+      mime_type: "image/png",
       colors: 4,
       bit_depth: 2,
       rotation: 90,
       offset_x: 10,
       offset_y: 15,
+      scale_factor: 1.5,
+      palette_names: ["bw"],
+      css: {"classes" => {"size" => "small"}},
       width: 800,
       height: 480
     }
@@ -46,6 +48,9 @@ RSpec.describe "/api/models", :db do
           rotation: 0,
           offset_x: 0,
           offset_y: 0,
+          scale_factor: 1.0,
+          palette_names: [],
+          css: {},
           width: 800,
           height: 480,
           created_at: match_rfc_3339,
@@ -83,6 +88,9 @@ RSpec.describe "/api/models", :db do
         rotation: 0,
         offset_x: 0,
         offset_y: 0,
+        scale_factor: 1.0,
+        palette_names: [],
+        css: {},
         width: 800,
         height: 480,
         created_at: match_rfc_3339,
@@ -113,12 +121,15 @@ RSpec.describe "/api/models", :db do
         name: "test",
         description: "A test.",
         kind: "terminus",
-        mime_type: "image/bmp",
+        mime_type: "image/png",
         colors: 4,
         bit_depth: 2,
         rotation: 90,
         offset_x: 10,
         offset_y: 15,
+        scale_factor: 1.5,
+        palette_names: ["bw"],
+        css: {classes: {size: "small"}},
         width: 800,
         height: 480,
         created_at: match_rfc_3339,
@@ -128,7 +139,7 @@ RSpec.describe "/api/models", :db do
   end
 
   it "answers error when creation fails" do
-    attributes.delete :width
+    attributes.delete :label
 
     post routes.path(:api_models),
          {model: attributes}.to_json,
@@ -143,7 +154,7 @@ RSpec.describe "/api/models", :db do
       extensions: {
         errors: {
           model: {
-            width: ["is missing"]
+            label: ["is missing"]
           }
         }
       }
@@ -165,12 +176,15 @@ RSpec.describe "/api/models", :db do
         name: "test",
         description: "A test.",
         kind: "terminus",
-        mime_type: "image/bmp",
+        mime_type: "image/png",
         colors: 4,
         bit_depth: 2,
         rotation: 90,
         offset_x: 10,
         offset_y: 15,
+        scale_factor: 1.5,
+        palette_names: ["bw"],
+        css: {classes: {size: "small"}},
         width: 800,
         height: 480,
         created_at: match_rfc_3339,
@@ -219,6 +233,9 @@ RSpec.describe "/api/models", :db do
         rotation: 0,
         offset_x: 0,
         offset_y: 0,
+        scale_factor: 1.0,
+        palette_names: [],
+        css: {},
         width: 800,
         height: 480,
         created_at: match_rfc_3339,

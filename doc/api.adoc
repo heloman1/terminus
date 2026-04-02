@@ -706,43 +706,119 @@ curl "https://localhost:2443/api/models/1" \
   "data": [
     {
       "id": 1,
-      "name": "og_png",
-      "label": "TRMNL (1-bit)",
-      "description": "TRMNL (1-bit)",
-      "kind": "terminus",
+      "name": "v2",
+      "label": "TRMNL X",
+      "description": "TRMNL X",
+      "kind": "trmnl",
       "mime_type": "image/png",
-      "colors": 2,
-      "bit_depth": 1,
+      "colors": 16,
+      "bit_depth": 4,
       "rotation": 0,
       "offset_x": 0,
       "offset_y": 0,
-      "width": 800,
-      "height": 480,
-      "created_at": "2025-08-13T19:34:08+0000",
-      "updated_at": "2025-08-13T19:34:08+0000"
+      "scale_factor": 1.8,
+      "palette_names": [
+        "gray-16",
+        "gray-4",
+        "bw"
+      ],
+      "css": {
+        "classes": {
+          "size": "screen--lg",
+          "device": "screen--v2",
+          "density": "screen--density-2x"
+        },
+        "variables": [
+          [
+            "--screen-w",
+            "1040px"
+          ],
+          [
+            "--screen-h",
+            "780px"
+          ],
+          [
+            "--pixel-ratio",
+            "1.8"
+          ],
+          [
+            "--dither-pixel-ratio",
+            "2.0"
+          ],
+          [
+            "--ui-scale",
+            "1.0"
+          ],
+          [
+            "--gap-scale",
+            "1.0"
+          ]
+        ]
+      },
+      "width": 1872,
+      "height": 1404,
+      "created_at": "2026-02-12T15:57:28+0000",
+      "updated_at": "2026-04-01T20:09:35+0000"
     }
   ]
 }
 
 # Single model.
-{
-  "data": {
-    "id": 1,
-    "name": "og_png",
-    "label": "TRMNL (1-bit)",
-    "description": "TRMNL (1-bit)",
-    "kind": "terminus",
-    "mime_type": "image/png",
-    "colors": 2,
-    "bit_depth": 1,
-    "rotation": 0,
-    "offset_x": 0,
-    "offset_y": 0,
-    "width": 800,
-    "height": 480,
-    "created_at": "2025-08-13T19:34:08+0000",
-    "updated_at": "2025-08-13T19:34:08+0000"
-  }
+"data": {
+  "id": 1,
+  "name": "v2",
+  "label": "TRMNL X",
+  "description": "TRMNL X",
+  "kind": "trmnl",
+  "mime_type": "image/png",
+  "colors": 16,
+  "bit_depth": 4,
+  "rotation": 0,
+  "offset_x": 0,
+  "offset_y": 0,
+  "scale_factor": 1.8,
+  "palette_names": [
+    "gray-16",
+    "gray-4",
+    "bw"
+  ],
+  "css": {
+    "classes": {
+      "size": "screen--lg",
+      "device": "screen--v2",
+      "density": "screen--density-2x"
+    },
+    "variables": [
+      [
+        "--screen-w",
+        "1040px"
+      ],
+      [
+        "--screen-h",
+        "780px"
+      ],
+      [
+        "--pixel-ratio",
+        "1.8"
+      ],
+      [
+        "--dither-pixel-ratio",
+        "2.0"
+      ],
+      [
+        "--ui-scale",
+        "1.0"
+      ],
+      [
+        "--gap-scale",
+        "1.0"
+      ]
+    ]
+  },
+  "width": 1872,
+  "height": 1404,
+  "created_at": "2026-02-12T15:57:28+0000",
+  "updated_at": "2026-04-01T20:09:35+0000"
 }
 ----
 
@@ -759,20 +835,20 @@ curl -X "POST" "https://localhost:2443/api/models" \
      -H 'Content-Type: application/json' \
      -d $'{
   "model": {
-    "name": "demo",
-    "label": "Demo",
-    "description": "A demonstration.",
-    "kind": "terminus",
-    "rotation": 25,
-    "width": "1000",
-    "colors": 4,
-    "mime_type": "image/png",
-    "bit_depth": 2,
-    "offset_x": 50,
-    "height": "500",
-    "offset_y": 100,
-    "created_at": "2025-08-13T19:34:08+0000",
-    "updated_at": "2025-08-13T19:34:08+0000"
+    name: "demo",
+    label: "Demo",
+    description: "A demonstration.",
+    mime_type: "image/png",
+    bit_depth: 2,
+    colors: 4,
+    palette_names: ["bw"],
+    css: {"classes" => {"size" => "screen--md"}},
+    scale_factor: 1.5,
+    rotation: 90,
+    offset_x: 10,
+    offset_y: 15,
+    width: 800,
+    height: 480
   }
 }'
 ----
@@ -785,7 +861,7 @@ curl -X "POST" "https://localhost:2443/api/models" \
 ----
 {
   "data": {
-    "id": 12,
+    "id": 1,
     "name": "demo",
     "label": "Demo",
     "description": "A demonstration.",
@@ -794,12 +870,21 @@ curl -X "POST" "https://localhost:2443/api/models" \
     "colors": 4,
     "bit_depth": 2,
     "rotation": 25,
-    "offset_x": 50,
-    "offset_y": 100,
-    "width": 1000,
-    "height": 500,
-    "created_at": "2025-08-13T19:42:06+0000",
-    "updated_at": "2025-08-13T19:42:06+0000"
+    "offset_x": 10,
+    "offset_y": 15,
+    "scale_factor": 1.5,
+    "palette_names": [
+      "bw"
+    ],
+    "css": {
+      "classes": {
+        "size": "screen-md"
+      }
+    },
+    "width": 800,
+    "height": 480,
+    "created_at": "2026-04-01T23:55:12+0000",
+    "updated_at": "2026-04-01T23:55:12+0000"
   }
 }
 ----
@@ -815,12 +900,12 @@ curl -X "PUT" "https://localhost:2443/api/models/12" \
      -H 'Content-Type: application/json' \
      -d $'{
   "model": {
-    "description": "A patch demonstration."
+    "description": "A patch."
   }
 }'
 ----
 
-You can change a single attribute or multiple attributes at once.
+You can change a single attribute or multiple attributes at once. All attributes as shown in the POST example are supported.
 ====
 
 .PATCH Response
@@ -830,21 +915,30 @@ You can change a single attribute or multiple attributes at once.
 ----
 {
   "data": {
-    "id": 12,
+    "id": 1,
     "name": "demo",
     "label": "Demo",
-    "description": "A patch demonstration.",
+    "description": "A patch.",
     "kind": "terminus",
     "mime_type": "image/png",
     "colors": 4,
     "bit_depth": 2,
     "rotation": 25,
-    "offset_x": 50,
-    "offset_y": 100,
-    "width": 1000,
-    "height": 500,
-    "created_at": "2025-08-13T19:42:06+0000",
-    "updated_at": "2025-08-13T19:42:31+0000"
+    "offset_x": 10,
+    "offset_y": 15,
+    "scale_factor": 1.5,
+    "palette_names": [
+      "bw"
+    ],
+    "css": {
+      "classes": {
+        "size": "screen-md"
+      }
+    },
+    "width": 800,
+    "height": 480,
+    "created_at": "2026-04-01T23:55:12+0000",
+    "updated_at": "2026-04-01T23:55:12+0000"
   }
 }
 ----
@@ -869,21 +963,30 @@ curl -X "DELETE" "https://localhost:2443/api/models/2" \
 ----
 {
   "data": {
-    "id": 12,
+    "id": 1,
     "name": "demo",
     "label": "Demo",
-    "description": "A patch demonstration.",
+    "description": "A demonstration.",
     "kind": "terminus",
-    "width": 1000,
-    "height": 500,
     "mime_type": "image/png",
     "colors": 4,
     "bit_depth": 2,
     "rotation": 25,
-    "offset_x": 50,
-    "offset_y": 100,
-    "created_at": "2025-08-13 19:42:06 UTC",
-    "updated_at": "2025-08-13 19:42:31 UTC"
+    "offset_x": 10,
+    "offset_y": 15,
+    "scale_factor": 1.5,
+    "palette_names": [
+      "bw"
+    ],
+    "css": {
+      "classes": {
+        "size": "screen-md"
+      }
+    },
+    "width": 800,
+    "height": 480,
+    "created_at": "2026-04-01T23:55:12+0000",
+    "updated_at": "2026-04-01T23:55:12+0000"
   }
 }
 ----
