@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "initable"
 require "securerandom"
 
 module Terminus
@@ -8,11 +7,15 @@ module Terminus
     module Devices
       # Builds default attributes for new devices.
       class Defaulter
-        include Initable[randomizer: SecureRandom]
+        def initialize randomizer: SecureRandom, mac_address_builder: Devices::MACAddressBuilder
+          @randomizer = randomizer
+          @mac_address_builder = mac_address_builder
+        end
 
         def call
           {
             api_key: randomizer.alphanumeric(20),
+            mac_address: mac_address_builder.call,
             firmware_update: true,
             friendly_id: randomizer.hex(3).upcase,
             image_timeout: 0,
@@ -20,6 +23,10 @@ module Terminus
             refresh_rate: 900
           }
         end
+
+        private
+
+        attr_reader :randomizer, :mac_address_builder
       end
     end
   end
